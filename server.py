@@ -1,17 +1,33 @@
-from fastapi import FastAPI, Request
+import os
+from contextlib import asynccontextmanager
 
-app = FastAPI(debug=True)
+import httpx
+from fastapi import FastAPI, Request, Response
+
+app = FastAPI()
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    async with httpx.AsyncClient() as client:
+        app.state.client = client
+        yield
+
+
+app = FastAPI(lifespan=lifespan)
 
 
 @app.api_route(
-    "/{full_path:path}",
+    "/{path:path}",
     methods=["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
 )
-async def catch_all(request: Request, full_path: str):
-    return {
-        "status": "received",
-        "path": full_path,
-        "method": request.method,
-        "query_params": request.query_params,
-        "headers": request.headers,
-    }
+async def catch_all(request: Request, path: str):
+    client: httpx.AsyncClient = request.app.state.client
+
+    response = await client.request(
+        method=request.method,
+        url=f"{os.getenv('ORIGIN')}/{path}",
+        params=request.query_params,
+    )
+
+    return Response(content=response.content, status_code=response.status_code)
