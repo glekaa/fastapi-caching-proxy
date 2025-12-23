@@ -3,5 +3,7 @@ name = "caching-proxy-fastapi"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "fastapi>=0.127.0",
     "typer>=0.20.1",
+    "uvicorn>=0.40.0",
 ]
