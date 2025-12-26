@@ -1,6 +1,6 @@
 # Caching Proxy CLI
 
-A high-performance CLI tool that starts a caching proxy server. It forwards requests to an origin server and caches the responses in Redis to speed up subsequent requests. Built with **FastAPI**, **Redis**, and **Typer**.
+A high-performance CLI tool that starts a caching proxy server. It forwards requests to an origin server and caches the responses in Redis to speed up subsequent requests. Built with [FastAPI](https://fastapi.tiangolo.com/), [Redis](https://redis.io/), and [Typer](https://typer.tiangolo.com/).
 
 ## Features
 
@@ -56,8 +56,7 @@ caching-proxy --port 3000 --origin https://dummyjson.com
 | Option          | Description                                      | Default                 |
 |-----------------|--------------------------------------------------|-------------------------|
 | `--port`        | The port on which the proxy server will run      | `3000`                  |
-| `--origin`      | The URL of the server to forward requests to     | `https://google.com`    |
-| `--clear-cache` | Clear the Redis cache and exit                   | `false`                 |
+| `--origin`      | The URL of the server to forward requests to     | `https://dummyjson.com` |
 
 ### Start the Server
 ```bash
@@ -77,17 +76,10 @@ Now you can request `http://localhost:3000/products` and it will be proxied to `
 *   **Second Request**: `X-Cache: HIT` (Served instantly from Redis)
 
 ### Clear Cache
-To wipe the database:
-```bash
-# With uv
-uv run caching-proxy --clear-cache
+To clear the Redis cache, run `caching-proxy` with the `--clear-cache` flag as a standalone command:
 
-# Or if installed
+```bash
 caching-proxy --clear-cache
 ```
 
-## Tech Stack
-*   [FastAPI](https://fastapi.tiangolo.com/)
-*   [Typer](https://typer.tiangolo.com/)
-*   [Httpx](https://www.python-httpx.org/)
-*   [Redis](https://redis.io/)
+This clears all cached responses and exits immediately.
