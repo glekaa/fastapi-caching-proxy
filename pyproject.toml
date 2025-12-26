@@ -9,3 +9,9 @@ dependencies = [
     "typer>=0.20.1",
     "uvicorn>=0.40.0",
 ]
+
+[project.scripts]
+caching-proxy = "main:app"
+
+[tool.setuptools]
+py-modules = ["main", "server"]
