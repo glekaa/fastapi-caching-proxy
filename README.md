@@ -7,7 +7,6 @@ A high-performance CLI tool that starts a caching proxy server. It forwards requ
 - Forward requests to any origin server and cache responses in Redis
 - Returns `X-Cache: HIT` or `MISS` headers to indicate cache status
 - Clear cache with a single `--clear-cache` flag
-- Works with `uv` or standard `pip`
 
 ## Prerequisites
 
@@ -83,3 +82,7 @@ caching-proxy --clear-cache
 ```
 
 This clears all cached responses and exits immediately.
+
+### Extras
+
+This Repo serves as a solution to [Roadmap.sh Caching Server Problem](https://roadmap.sh/projects/caching-server)
