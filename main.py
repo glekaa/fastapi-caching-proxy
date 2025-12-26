@@ -21,7 +21,7 @@ def clear_cache_callback(value: bool):
 @app.command()
 def caching_proxy(
     port: int = 3000,
-    origin: str = "https://google.com",
+    origin: str = "https://dummyjson.com/",
     clear_cache: bool = typer.Option(
         False, "--clear-cache", callback=clear_cache_callback, is_eager=True
     ),

@@ -9,6 +9,9 @@ dependencies = [
     "typer>=0.20.1",
     "uvicorn>=0.40.0",
 ]
+authors = [
+    { name = "Pavel Melnik", email = "pmelnik@edu.cdv.pl"}
+]
 
 [project.scripts]
 caching-proxy = "main:app"
